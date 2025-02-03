@@ -14,5 +14,7 @@ import Board from "./Board.vue";
 <style scoped>
 .inventory {
   display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
 }
 </style>

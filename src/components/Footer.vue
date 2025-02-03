@@ -15,6 +15,7 @@
 
 <style scoped>
  .footer {
+   position: relative;
    display: flex;
    justify-content: space-between;
    width: 785px;
@@ -22,16 +23,20 @@
    border: 1px solid var(--color-background-thirdly);
    border-radius: var(--radius);
    padding: 18px;
-  background-color: var(--color-background-secondary);
+   background-color: var(--color-background-secondary);
  }
 
  .footer__content {
    width: 90%;
+   padding: 6px;
    border-radius: var(--radius);
    background: var(--gradient);
  }
 
  .close {
+   position: absolute;
+   top: 8px;
+   right: 8px;
    height: 24px;
    width: 24px;
    margin-left: 0;
