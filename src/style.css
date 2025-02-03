@@ -1,16 +1,47 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --color-background-primary: #1D1D1D;
+  --color-background-secondary: #262626;
+  --color-background-thirdly: #4D4D4D;
+
+  --color-typography-primary: #FFFFFF;
+  /*--color-typography-secondary: #787878;*/
+  /*--color-typography-thidly: #9E9B98;*/
+
+  --color-purple: #656CAA;
+  --color-green: #7FAA65;
+  --color-grey-umber: #2D2D2D;
+  --color-grey-beige: #9E9764;
+  --color-red: #FA7272;
+
+  --font-family: 'Inter', system-ui;
+  --font-size: 20px;
+
+  font-family: var(--font-family), sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--color-typography-primary);
+  background-color: var(--color-background-primary);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --radius: 12px;
+  --gradient: linear-gradient(257.38deg, #3C3C3C 0%, #444444 51%, #333333 100%);
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/src/assets/fonts/Inter-Italic.ttf");
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/src/assets/fonts/Inter.ttf");
 }
 
 a {
@@ -26,7 +57,7 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
-  min-width: 320px;
+  width: 100%;
   min-height: 100vh;
 }
 
@@ -68,7 +99,7 @@ button:focus-visible {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
+    background-color: var(--color-background-secondary);
   }
   a:hover {
     color: #747bff;
