@@ -5,9 +5,9 @@ import ItemThird from '/src/assets/img/ItemThird.png';
 import Cell from "./Cell.vue";
 import {ref} from "vue";
 const elements = ref([
-  { id: 1, name: "Element 1", url: ItemFirst },
-  { id: 2, name: "Element 2", url: ItemSecond },
-  { id: 3, name: "Element 3", url: ItemThird },
+  { id: 1, name: "Element 1", url: ItemFirst, count: 4 },
+  { id: 2, name: "Element 2", url: ItemSecond, count: 2 },
+  { id: 3, name: "Element 3", url: ItemThird, count: 5 },
   null, null, null, null, null, null, null, null, null, null, null,
   null, null, null, null, null, null, null, null, null, null, null
 ]);

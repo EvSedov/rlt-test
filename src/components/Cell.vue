@@ -25,6 +25,13 @@ const { element } = defineProps({element: {type: Object, default: null}});
 }
 
 .cell__count {
-
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 2px 6px;
+  color: var(--color-typography-primary);
+  font-size: var(--font-size-small);
+  border: 1px solid var(--color-background-thirdly);
+  border-top-left-radius: 8px;
 }
 </style>

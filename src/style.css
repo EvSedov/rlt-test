@@ -15,6 +15,7 @@
 
   --font-family: 'Inter', system-ui;
   --font-size: 20px;
+  --font-size-small: 10px;
 
   font-family: var(--font-family), sans-serif;
   line-height: 1.5;
