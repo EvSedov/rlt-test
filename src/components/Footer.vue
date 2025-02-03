@@ -1,13 +1,16 @@
 <script setup lang="ts">
+import {ref} from "vue";
 
+const hide = ref<boolean>(false);
+const close = (): void => { hide.value = true };
 </script>
 
 <template>
-<div class="footer">
+<div v-if="!hide" class="footer">
   <div class="footer__content">
     <p>Текст в подвале</p>
   </div>
-  <button type="button" class="close" aria-label="Close">
+  <button type="button" class="close" aria-label="Close" @click="close">
     <span aria-hidden="true">&#10006;</span>
   </button>
 </div>
