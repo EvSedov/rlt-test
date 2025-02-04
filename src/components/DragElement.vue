@@ -4,10 +4,11 @@ const { srcIcon } = defineProps({
   name: { type: String, default: '' },
   srcIcon: { type: String, default: ''},
 });
+
 </script>
 
 <template>
-  <div class="element" :id="`${id}`">
+  <div class="element" :id="`${id}`" >
     <img :src="srcIcon" :alt="name"/>
   </div>
 </template>

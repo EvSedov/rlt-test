@@ -1,15 +1,28 @@
 <script setup lang="ts">
-import DragElement from "./DragElement.vue";
+const { cellId, countElement } = defineProps({
+  cellId: {type: Number, default: null},
+  countElement: { type: Number, default: null }
+});
 
-const { element } = defineProps({element: {type: Object, default: null}});
+const emits = defineEmits(["dropCell"]);
+
+const onDrop = (event: DragEvent) => {
+  const elementId = parseInt(event.dataTransfer!.getData('elementId'));
+  emits('dropCell', elementId);
+}
 </script>
 
 <template>
-  <div class="cell">
+  <div
+      class="cell"
+      @drop="onDrop($event, cellId)"
+      @dragover.prevent
+      @dragenter.prevent
+  >
     <div class="cell__content">
-      <DragElement v-if="element" :id="element.id" :srcIcon="element.icon" :name="element.name"  />
+      <slot/>
     </div>
-    <div v-if="element && element.count" class="cell__count">{{ element.count }}</div>
+    <div v-if="countElement" class="cell__count">{{ countElement }}</div>
   </div>
 </template>
 

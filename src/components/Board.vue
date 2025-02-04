@@ -1,34 +1,83 @@
 <script setup lang="ts">
+import {ref} from "vue";
+
+import Cell from "./Cell.vue";
+import DragElement from "./DragElement.vue";
+import CardDetailedInformation from "./CardDetailedInformation.vue";
+
 import ItemFirst from '/src/assets/img/ItemFirst.png';
 import ItemSecond from '/src/assets/img/ItemSecond.png';
 import ItemThird from '/src/assets/img/ItemThird.png';
-import Cell from "./Cell.vue";
-import {ref} from "vue";
-import CardDetailedInformation from "./CardDetailedInformation.vue";
 
-const selectedIndex = ref<number | null>(null);
-const selectedItem = ref<{ id: number, name: string, icon: string, count: number } | null>(null)
-const elements = ref([
-  { id: 0, name: "Element 1", icon: ItemFirst, description: 'Описание предмета с названием Element 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos, tempore!', count: 4 },
-  { id: 1, name: "Element 2", icon: ItemSecond, description: 'Описание предмета с названием Element 2. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos, tempore!', count: 2 },
-  { id: 2, name: "Element 3", icon: ItemThird, description: 'Описание предмета с названием Element 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos, tempore!', count: 5 },
-  null, null, null, null, null, null, null, null, null, null, null,
-  null, null, null, null, null, null, null, null, null, null, null
+interface IElement {
+  id: number,
+  cellId: number,
+  count: number
+  name: string,
+  icon: string,
+  description: string,
+}
+
+const cells = ref<{ id: number}[]>([
+    {id: 1}, {id: 2}, {id: 3}, {id: 4}, {id: 5},
+    {id: 6}, {id: 7}, {id: 8}, {id: 9}, {id: 10},
+    {id: 11}, {id: 12}, {id: 13}, {id: 14}, {id: 15},
+    {id: 16}, {id: 17}, {id: 18}, {id: 19}, {id: 20},
+    {id: 21}, {id: 22}, {id: 23}, {id: 24}, {id: 25}
 ]);
 
-const selectItem = (item: { id: number, name: string, icon: string, count: number }, index: number) => {
+const selectedItem = ref<IElement | null>(null)
+const elements = ref<IElement[]>([
+  { id: 1, cellId: 1,  name: "Element 1", icon: ItemFirst, description: 'Описание предмета с названием Element 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos, tempore!', count: 4 },
+  { id: 2, cellId: 2,  name: "Element 2", icon: ItemSecond, description: 'Описание предмета с названием Element 2. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos, tempore!', count: 2 },
+  { id: 3, cellId: 3,  name: "Element 3", icon: ItemThird, description: 'Описание предмета с названием Element 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos, tempore!', count: 5 },
+]);
+
+
+
+const selectItem = (item: IElement) => {
   selectedItem.value = item;
-  selectedIndex.value = index;
-  console.log({item: selectedItem.value, index: index});
+  console.log({item: selectedItem.value});
+};
+
+const startDragElement = (event: DragEvent, element: IElement) => {
+    event.dataTransfer!.dropEffect = "move";
+    event.dataTransfer!.effectAllowed = "move";
+    event.dataTransfer!.setData('elementId', element.id.toString());
+    console.log({element, index: event.dataTransfer!.getData('elementId')});
 }
+
+const dropElement = (elementId: number, cellId: number) => {
+  elements.value = elements.value.map((item: IElement) => {
+    if (item.id === elementId) {
+      item.cellId = cellId;
+    }
+    return item;
+  })
+  console.log({elementId, cellId});
+}
+
 </script>
 
 <template>
   <div class="board">
-    <div v-for="(item, index) in elements" :key="`${index}-${item?.name}`">
-      <Cell v-if="item" :element="item" @click="selectItem(item, index)"/>
-      <Cell v-else />
-    </div>
+      <Cell
+        v-for="cell in cells"
+        :key="`${cell.id}`"
+        :cellId="cell.id"
+        :element="cell"
+        @drop-cell="(elementId: number) => dropElement(elementId, cell.id)"
+      >
+        <DragElement
+            v-for="element in elements.filter((el) => el?.cellId === cell.id)"
+            :id="element.id"
+            :srcIcon="element.icon"
+            :name="element.name"
+            draggable="true"
+            @dragstart="startDragElement($event, element)"
+            @click="selectItem(element)"
+        />
+      </Cell>
     <CardDetailedInformation v-if="selectedItem" :element="selectedItem" class="cardDetailedInformation" />
   </div>
 </template>
