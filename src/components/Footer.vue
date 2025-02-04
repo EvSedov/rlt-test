@@ -16,7 +16,7 @@ const close = (): void => { hide.value = true };
 </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
  .footer {
    position: relative;
    display: flex;
