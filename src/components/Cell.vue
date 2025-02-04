@@ -15,7 +15,7 @@ const onDrop = (event: DragEvent) => {
 <template>
   <div
       class="cell"
-      @drop="onDrop($event, cellId)"
+      @drop="onDrop($event)"
       @dragover.prevent
       @dragenter.prevent
   >
