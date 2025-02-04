@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { cellId, countElement } = defineProps({
+const { countElement } = defineProps({
   cellId: {type: Number, default: null},
   countElement: { type: Number, default: null }
 });
