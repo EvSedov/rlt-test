@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Button from "./Button.vue";
 const { element } = defineProps({element: {type: Object, default: null}});
+const emits = defineEmits(['deleting'])
 </script>
 
 <template>
@@ -17,7 +18,7 @@ const { element } = defineProps({element: {type: Object, default: null}});
     </div>
   </div>
   <div class="card-detailed-information__footer">
-    <Button bg-color="#FA7272" text-color="#FFFFFF" text="Удалить предмет" />
+    <Button bg-color="#FA7272" text-color="#FFFFFF" text="Удалить предмет" @click="emits('deleting')" />
   </div>
 </div>
 </template>
