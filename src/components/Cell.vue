@@ -1,8 +1,4 @@
 <script setup lang="ts">
-const { countElement } = defineProps({
-  cellId: { type: Number, default: null },
-});
-
 const emits = defineEmits(["dropCell"]);
 
 const onDrop = (event: DragEvent) => {
