@@ -129,7 +129,7 @@ const confirmDeletion = () => {
 
   if (selectedItem.value && countForDelete.value > selectedItem.value?.count) {
     selectedItem.value.count = 0;
-  } else {
+  } else if (selectedItem.value) {
     selectedItem.value.count = selectedItem.value.count - countForDelete.value;
   }
 
