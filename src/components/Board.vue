@@ -138,6 +138,10 @@ const confirmDeletion = () => {
       (item: IElement) => item.id !== selectedItem.value!.id
     );
 
+    localStorage.setItem(
+      localStorageKey,
+      JSON.stringify(currentPositionElements.value)
+    );
     cancelDeletion();
     return;
   }
@@ -150,6 +154,10 @@ const confirmDeletion = () => {
     return item;
   });
 
+  localStorage.setItem(
+    localStorageKey,
+    JSON.stringify(currentPositionElements.value)
+  );
   cancelDeletion();
 };
 
@@ -181,6 +189,7 @@ onBeforeMount(() => {
         :id="element.id"
         :srcIcon="element.icon"
         :name="element.name"
+        :count="element.count"
         :draggable="true"
         @dragstart="startDragElement($event, element)"
         @click="selectItem(element)"
